@@ -3,11 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Velmont Clothing Store</title>
-<meta name="description" content="Velmont Clothing Store — men's & women's fashion, footwear and accessories.">
+<title>Velmont Clothing Store — Men's Fashion in Dhanuvachapuram, Kerala</title>
+<meta name="description" content="Velmont Clothing Store — men's fashion, ethnicwear, footwear and accessories in Dhanuvachapuram, Kerala. Rated 5.0 on Google.">
+<meta name="theme-color" content="#1a1b1e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20'%3E%3Cpath d='M2 18L8 4L12 11L15 6L22 18H2Z' fill='%23FFD400'/%3E%3C/svg%3E">
+<meta property="og:title" content="Velmont Clothing Store">
+<meta property="og:description" content="Men's fashion, ethnicwear, footwear and accessories in Dhanuvachapuram, Kerala. Rated 5.0 on Google.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ClothingStore",
+  "name": "Velmont Clothing Store",
+  "image": "",
+  "telephone": "+91-90720-99118",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kunnathukal Road, Indhira Nagar, Dhanuvachapuram, Mekkolla",
+    "addressLocality": "Dhanuvachapuram",
+    "addressRegion": "Kerala",
+    "postalCode": "695503",
+    "addressCountry": "IN"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3"
+  }
+}
+</script>
 <style>
 
   :root{
@@ -33,6 +60,37 @@
   }
   a{color:inherit; text-decoration:none;}
   img,svg{display:block; max-width:100%;}
+
+  /* grain texture for editorial depth */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:1;
+    pointer-events:none;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* preloader */
+  #preloader{
+    position:fixed; inset:0; z-index:999;
+    background:var(--charcoal);
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hide{opacity:0; visibility:hidden;}
+  .preload-mark{width:52px; height:44px; animation:pulseMark 1.1s ease-in-out infinite;}
+  @keyframes pulseMark{0%,100%{transform:scale(1); opacity:1;} 50%{transform:scale(0.86); opacity:0.6;}}
+
+  /* scroll progress bar */
+  #progress{
+    position:fixed; top:0; left:0; height:3px;
+    background:var(--volt); z-index:150; width:0%;
+    transition:width 0.1s linear;
+  }
+
+  /* scroll reveal */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
@@ -72,7 +130,9 @@
     background:rgba(26,27,30,0.86);
     backdrop-filter: blur(10px);
     border-bottom:1px solid var(--line);
+    transition:padding 0.3s ease, background 0.3s ease;
   }
+  header.scrolled{background:rgba(20,21,24,0.96); box-shadow:0 8px 30px rgba(0,0,0,0.35);}
   nav{
     display:flex; align-items:center; justify-content:space-between;
     padding:16px 6vw;
@@ -171,11 +231,71 @@
     letter-spacing:0.04em; text-transform:uppercase;
     clip-path: polygon(6% 0,100% 0,94% 100%,0% 100%);
     transition:transform 0.2s ease, background 0.2s ease;
+    position:relative; overflow:hidden;
   }
+  .btn::before{
+    content:""; position:absolute; top:0; left:-60%;
+    width:40%; height:100%;
+    background:rgba(255,255,255,0.25);
+    transform:skewX(-20deg);
+    transition:left 0.5s ease;
+  }
+  .btn:hover::before{left:120%;}
   .btn:hover{transform:translateY(-2px);}
   .btn-primary{background:var(--volt); color:var(--charcoal);}
   .btn-ghost{background:transparent; color:var(--bone); border:1.5px solid var(--line);}
   .btn-ghost:hover{border-color:var(--volt);}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    background:var(--volt);
+    color:var(--charcoal);
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:1px solid var(--charcoal);
+    border-bottom:1px solid var(--charcoal);
+    position:relative; z-index:3;
+  }
+  .marquee-track{
+    display:inline-flex;
+    animation:scrollMarquee 26s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'Anton', sans-serif;
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    padding:14px 28px;
+    display:inline-flex; align-items:center; gap:14px;
+  }
+  .marquee-track span::after{content:"◆"; font-size:0.7rem; margin-left:14px;}
+  @keyframes scrollMarquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* ---------- USPs ---------- */
+  .usp-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .usp-card{background:var(--charcoal); padding:36px 28px;}
+  .usp-card .info-icon{margin-bottom:18px;}
+  .usp-card h4{font-size:0.95rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--bone); margin-bottom:10px; font-weight:600;}
+  .usp-card p{color:var(--smoke); font-size:0.88rem; line-height:1.6;}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .gallery-item{
+    aspect-ratio:1; position:relative; overflow:hidden;
+    background:linear-gradient(150deg,var(--steel),var(--charcoal-2));
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line);
+  }
+  .gallery-item:nth-child(3n+1){background:linear-gradient(150deg,#26304a,var(--charcoal-2));}
+  .gallery-item:nth-child(3n+2){background:linear-gradient(150deg,#3a3320,var(--charcoal-2));}
+  .gallery-item svg{width:34%; opacity:0.85; transition:transform 0.4s ease;}
+  .gallery-item:hover svg{transform:scale(1.12) rotate(-4deg);}
+  .gallery-item .gtag{
+    position:absolute; bottom:10px; left:12px;
+    font-family:'JetBrains Mono', monospace; font-size:0.62rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--smoke);
+  }
+  .gallery-note{color:var(--smoke); font-size:0.85rem; margin-top:22px; font-style:italic;}
 
   /* ---------- SECTION SCAFFOLD ---------- */
   section{padding:120px 0; position:relative;}
@@ -267,6 +387,22 @@
   .foot-col h5{font-family:'JetBrains Mono', monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--volt); margin-bottom:16px;}
   .foot-col a, .foot-col p{display:block; color:var(--smoke); font-size:0.9rem; margin-bottom:10px;}
   .foot-col a:hover{color:var(--bone);}
+  .social-row{display:flex; gap:12px; margin-top:6px;}
+  .social-row a{
+    width:36px; height:36px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .social-row a:hover{border-color:var(--volt); background:rgba(255,212,0,0.08);}
+  .social-row svg{width:16px; height:16px;}
+  .review-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    margin-top:24px; padding:14px 22px;
+    border:1px solid var(--line);
+    font-size:0.85rem; font-weight:600; color:var(--bone);
+    transition:border-color 0.2s ease;
+  }
+  .review-cta:hover{border-color:var(--volt);}
   .footer-bottom{
     display:flex; justify-content:space-between; align-items:center;
     padding-top:26px; border-top:1px solid var(--line);
@@ -296,6 +432,8 @@
     .collections-grid{grid-template-columns:1fr;}
     section{padding:80px 0;}
     .stat-row{gap:30px;}
+    .usp-grid{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -305,6 +443,11 @@
 </style>
 </head>
 <body>
+
+<div id="preloader">
+  <svg class="preload-mark" viewBox="0 0 24 20" fill="none"><path d="M2 18L8 4L12 11L15 6L22 18H2Z" fill="#FFD400"/></svg>
+</div>
+<div id="progress"></div>
 
 <header>
   <nav>
@@ -341,8 +484,8 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD400"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1L12 2z"/></svg>
       <span>5.0 on Google &middot; 3 reviews</span>
     </div>
-    <p class="desc">Menswear, footwear and accessories curated for people who don't dress to blend in. New arrivals land every week at our Dhanuvachapuram storefront.</p>
-    <div class="hero-ctas">
+    <p class="desc reveal">Menswear, footwear and accessories curated for people who don't dress to blend in. New arrivals land every week at our Dhanuvachapuram storefront.</p>
+    <div class="hero-ctas reveal">
       <a href="https://wa.me/919072099118" class="btn btn-primary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18a8 8 0 01-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8 8 0 1112 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.5.7-.6.8-.2.2-.4.1a6.6 6.6 0 01-1.9-1.2 7 7 0 01-1.3-1.6c-.1-.2 0-.3.1-.4l.3-.4c.1-.1.1-.2.2-.3a.4.4 0 000-.4c0-.1-.5-1.3-.7-1.8s-.4-.4-.5-.4h-.4a.9.9 0 00-.6.3 2.6 2.6 0 00-.8 1.9c0 1.1.8 2.2.9 2.3s1.6 2.5 3.9 3.5a12 12 0 001.3.5 3.2 3.2 0 001.4.1c.4-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1-.2-.1-.4-.2z"/></svg>
         Chat on WhatsApp
@@ -352,9 +495,43 @@
   </div>
 </section>
 
+<div class="marquee">
+  <div class="marquee-track">
+    <span>New Arrivals Weekly</span><span>Men's Fashion</span><span>Ethnic &amp; Fusion</span><span>Footwear &amp; Accessories</span><span>5.0 Rated on Google</span><span>Dhanuvachapuram, Kerala</span>
+    <span>New Arrivals Weekly</span><span>Men's Fashion</span><span>Ethnic &amp; Fusion</span><span>Footwear &amp; Accessories</span><span>5.0 Rated on Google</span><span>Dhanuvachapuram, Kerala</span>
+  </div>
+</div>
+
+<section id="usp">
+  <div class="wrap">
+    <div class="usp-grid">
+      <div class="usp-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.8"><path d="M12 2l2.6 6.8L21 9l-5.2 4.5L17.2 21 12 17.3 6.8 21l1.4-7.5L3 9l6.4-.2L12 2z"/></svg></div>
+        <h4>Hand-Picked Stock</h4>
+        <p>Every piece is chosen for fit and finish before it hits the rail — no filler stock.</p>
+      </div>
+      <div class="usp-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Honest Fitting</h4>
+        <p>Our floor team tells you straight if a piece isn't your look — no upselling.</p>
+      </div>
+      <div class="usp-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.8"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/><path d="M12 7v5l3 3"/></svg></div>
+        <h4>New Drops Weekly</h4>
+        <p>Fresh arrivals land every week, so the rails never feel stale.</p>
+      </div>
+      <div class="usp-card reveal">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.8"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1L12 2z"/></svg></div>
+        <h4>5.0 Rated</h4>
+        <p>Backed by a perfect Google rating from customers who walked in and found their look.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="wrap about-grid">
-    <div class="about-copy">
+    <div class="about-copy reveal">
       <div class="eyebrow">Our Story</div>
       <h2 style="margin:16px 0 24px; font-size:clamp(2rem,4.5vw,3rem); color:var(--bone);">Built From The Ground Up, Aimed At The Summit</h2>
       <p>Velmont opened its doors in Dhanuvachapuram with one idea: <strong>everyday fashion should feel like an achievement, not a compromise.</strong> Every rail in the store is picked for fit, fabric and finish first.</p>
@@ -365,7 +542,7 @@
         <div class="stat"><b>100%</b><span>Try before you buy</span></div>
       </div>
     </div>
-    <div class="about-visual">
+    <div class="about-visual reveal">
       <svg viewBox="0 0 200 200" fill="none">
         <path d="M20 160L70 60L100 110L130 50L180 160H20Z" fill="#FFD400"/>
         <path d="M20 160L70 60L100 110L82 142H20Z" fill="#e6bf00"/>
@@ -376,13 +553,13 @@
 
 <section id="collections">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <h2>What's<br>On The Rail</h2>
       <p>Three tightly-edited collections — no clutter, no filler racks. If it's out on the floor, it earned its spot.</p>
     </div>
     <div class="collections-grid">
 
-      <div class="collection-card">
+      <div class="collection-card reveal">
         <div class="collection-media cm-men">
           <svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.6"><path d="M6 3l6 3 6-3 3 5-4 2v11H7V10L3 8l3-5z"/></svg>
         </div>
@@ -393,7 +570,7 @@
         </div>
       </div>
 
-      <div class="collection-card">
+      <div class="collection-card reveal">
         <div class="collection-media cm-women">
           <svg viewBox="0 0 24 24" fill="none" stroke="#3a63e0" stroke-width="1.6"><path d="M8 3h8l2 4-4 2 1 12H7L8 9 4 7l4-4z"/></svg>
         </div>
@@ -404,7 +581,7 @@
         </div>
       </div>
 
-      <div class="collection-card">
+      <div class="collection-card reveal">
         <div class="collection-media cm-acc">
           <svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.6"><path d="M4 10l8-6 8 6v10a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1V10z"/></svg>
         </div>
@@ -419,9 +596,25 @@
   </div>
 </section>
 
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Inside The<br>Store</h2>
+      <p>A look at the space — swap these tiles for real shop-floor and product photography whenever it's ready.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.4"><path d="M6 3l6 3 6-3 3 5-4 2v11H7V10L3 8l3-5z"/></svg><span class="gtag">Storefront</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#3a63e0" stroke-width="1.4"><path d="M4 10l8-6 8 6v10a1 1 0 01-1 1h-4v-6H9v6H5a1 1 0 01-1-1V10z"/></svg><span class="gtag">Interior</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.4"><path d="M8 3h8l2 4-4 2 1 12H7L8 9 4 7l4-4z"/></svg><span class="gtag">New Arrivals</span></div>
+      <div class="gallery-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#3a63e0" stroke-width="1.4"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1L12 2z"/></svg><span class="gtag">Customer Favorites</span></div>
+    </div>
+    <p class="gallery-note reveal">Photos coming soon — placeholder tiles shown until final shoot is delivered.</p>
+  </div>
+</section>
+
 <section class="visit" id="visit">
   <div class="wrap visit-grid">
-    <div class="visit-info">
+    <div class="visit-info reveal">
       <div class="eyebrow">Find Us</div>
       <h2>Visit The Store</h2>
 
@@ -451,9 +644,14 @@
           <p class="muted">Tap the WhatsApp icon anytime for quick replies</p>
         </div>
       </div>
+
+      <a href="https://www.google.com/maps?q=Velmont+Clothing+Store,+Kunnathukal+Road,+Dhanuvachapuram,+Kerala+695503" target="_blank" class="review-cta">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD400"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1L12 2z"/></svg>
+        See us on Google · 5.0 rating
+      </a>
     </div>
 
-    <div class="map-frame">
+    <div class="map-frame reveal">
       <iframe src="https://www.google.com/maps?q=Velmont+Clothing+Store,+Kunnathukal+Road,+Dhanuvachapuram,+Kerala+695503&output=embed" loading="lazy" allowfullscreen></iframe>
     </div>
   </div>
@@ -478,6 +676,10 @@
           <a href="https://wa.me/919072099118">WhatsApp</a>
           <p>090720 99118</p>
           <p>Dhanuvachapuram, Kerala</p>
+          <div class="social-row">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#f3f1ea" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="#f3f1ea" stroke-width="1.6"><path d="M15 8h2V4h-2a4 4 0 00-4 4v3H9v4h2v7h4v-7h3l1-4h-4V9a1 1 0 011-1z"/></svg></a>
+          </div>
         </div>
       </div>
     </div>
@@ -497,6 +699,27 @@
   const navlinks = document.getElementById('navlinks');
   burger.addEventListener('click', () => navlinks.classList.toggle('open'));
   navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+  // preloader
+  window.addEventListener('load', () => {
+    document.getElementById('preloader').classList.add('hide');
+  });
+
+  // scroll progress + nav shrink
+  const progress = document.getElementById('progress');
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+    header.classList.toggle('scrolled', h.scrollTop > 40);
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
 </body>
