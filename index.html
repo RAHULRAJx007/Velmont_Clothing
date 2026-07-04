@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Velmont Clothing Store — Men's Fashion in Dhanuvachapuram, Kerala</title>
 <meta name="description" content="Velmont Clothing Store — men's fashion, ethnicwear, footwear and accessories in Dhanuvachapuram, Kerala. Rated 5.0 on Google.">
 <meta name="theme-color" content="#1a1b1e">
@@ -434,6 +434,58 @@
     .stat-row{gap:30px;}
     .usp-grid{grid-template-columns:repeat(2,1fr);}
     .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* ---------- PHONE ---------- */
+  @media (max-width:640px){
+    .wrap{padding:0 5.5vw;}
+    nav{padding:14px 5.5vw;}
+    .logo{font-size:1.1rem;}
+    .logo svg{width:22px; height:19px;}
+
+    section{padding:64px 0;}
+    .section-head{margin-bottom:36px;}
+    .section-head p{max-width:none;}
+
+    .hero{padding-top:70px; min-height:auto; padding-bottom:60px;}
+    .hero h1{font-size:15vw;}
+    .hero-sub{font-size:0.78rem; margin-bottom:18px;}
+    .rating-badge{flex-wrap:wrap; padding:8px 12px;}
+    .rating-badge span{width:100%; margin-left:0; margin-top:4px;}
+    .hero p.desc{font-size:0.95rem; margin-bottom:28px;}
+    .hero-ctas{flex-direction:column; width:100%;}
+    .hero-ctas .btn{width:100%; justify-content:center;}
+
+    .marquee-track span{font-size:0.85rem; padding:10px 16px;}
+
+    .about-grid{gap:40px;}
+    .stat-row{gap:22px 30px;}
+    .stat b{font-size:1.9rem;}
+
+    .usp-grid{grid-template-columns:1fr;}
+    .usp-card{padding:26px 22px;}
+
+    .collection-media{height:180px;}
+
+    .gallery-grid{grid-template-columns:repeat(2,1fr); gap:10px;}
+
+    .visit-grid{gap:34px;}
+    .info-row{gap:14px; padding:16px 0;}
+    .map-frame{min-height:260px;}
+    .map-frame iframe{min-height:260px;}
+    .review-cta{width:100%; justify-content:center;}
+
+    .footer-top{flex-direction:column; gap:30px;}
+    .foot-cols{gap:40px; width:100%; justify-content:space-between;}
+    .footer-bottom{flex-direction:column; align-items:flex-start; text-align:left;}
+
+    .wa-float{width:52px; height:52px; bottom:calc(18px + env(safe-area-inset-bottom, 0px)); right:18px;}
+    .wa-float svg{width:26px; height:26px;}
+  }
+
+  @media (max-width:380px){
+    .foot-cols{flex-direction:column; gap:26px;}
+    .hero h1{font-size:16vw;}
   }
 
   @media (prefers-reduced-motion: reduce){
